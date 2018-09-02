@@ -1,0 +1,14 @@
+﻿@page
+@model ExceptionsModel
+@{
+    ViewData["Title"] = "Exceptions";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@Model.Message</h3>
+
+<form method="post">
+
+    <button type="submit" class="btn btn-primary" value="Throw Unhandled Exception" asp-page-handler="Unhandled">Throw Unhandled Exception</button>
+
+</form>
+
