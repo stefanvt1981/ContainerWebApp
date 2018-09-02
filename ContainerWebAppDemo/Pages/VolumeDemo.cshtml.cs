@@ -26,6 +26,24 @@ namespace ContainerWebAppDemo.Pages
         public void OnGet()
         {
             Message = "Geef hieronder de tekst op om op te slaan.";
+            VolumeData.SavedText = _fileWriter.GetSavedString();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (VolumeData.Action == "Clear")
+            {
+                _fileWriter.Clear();
+                VolumeData.Action = "";
+            }
+            else
+            {
+                _fileWriter.SaveString(VolumeData.Input);
+            }
+
+            VolumeData.SavedText = _fileWriter.GetSavedString();
+
+            return RedirectToPage("./Index");
         }
     }
 }
