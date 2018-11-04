@@ -1,0 +1,29 @@
+﻿@page
+@model ContainerWebAppDemo.Pages.DelayModel
+@{
+    ViewData["Title"] = "Delay";
+}
+
+
+<h2>Delay</h2>
+
+<form method="post">
+
+    <div class="row">
+        <div class="col-sm-4">Gebruik vertraging:</div>
+        <div class="col-sm-8"><input type="radio" asp-for="@Model.DelayOptions.UseDelay" value="True" /> True</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Gebruik vertraging:</div>
+        <div class="col-sm-8"><input type="radio" asp-for="@Model.DelayOptions.UseDelay" value="False" /> False</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Delay in millisecondes:</div>
+        <div class="col-sm-8"><input id="savedTextbox" type="text" asp-for="@Model.DelayOptions.DelayInMilliseconds" /></div>
+    </div>
+    <div class="row col-sm-12">
+        <button id="saveBtn" type="submit" class="btn btn-primary">Opslaan</button>
+    </div>
+
+</form>
+

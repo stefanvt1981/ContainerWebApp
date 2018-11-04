@@ -3,30 +3,33 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:10000",
+      "applicationUrl": "http://localhost:10002",
       "sslPort": 0
     }
   },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      "launchUrl": "api/images",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ContainerWebAppDemo": {
+    "ImageService": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "api/images",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:10000"
+      "applicationUrl": "http://localhost:10002"
     },
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://localhost:{ServicePort}"
+      "launchUrl": "{Scheme}://localhost:{ServicePort}/api/images"
     }
   }
 }

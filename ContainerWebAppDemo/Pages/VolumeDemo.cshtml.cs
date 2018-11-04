@@ -16,6 +16,7 @@ namespace ContainerWebAppDemo.Pages
         public VolumeDemoModel(IFileWriterService fileWriter)
         {
             _fileWriter = fileWriter;
+            VolumeData = new VolumeModel();
         }
 
         public string Message { get; set; }
@@ -31,7 +32,7 @@ namespace ContainerWebAppDemo.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (VolumeData.Action == "Clear")
+            if (VolumeData.Action == "clear")
             {
                 _fileWriter.Clear();
                 VolumeData.Action = "";
@@ -43,7 +44,7 @@ namespace ContainerWebAppDemo.Pages
 
             VolumeData.SavedText = _fileWriter.GetSavedString();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./VolumeDemo");
         }
     }
 }

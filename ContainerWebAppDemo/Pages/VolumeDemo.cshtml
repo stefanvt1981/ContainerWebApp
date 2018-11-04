@@ -16,7 +16,7 @@
         <div class="col-sm-4">Opgeslagen tekst:</div>
         <div class="col-sm-8"><textarea id="savedTextbox" rows="10" cols="150" asp-for="VolumeData.SavedText"></textarea></div>
     </div>
-    <div class="row">
+    <div class="row col-sm-12">
         <input id="action" type="hidden" asp-for="VolumeData.Action" />
         <button id="saveBtn" type="submit" class="btn btn-primary">Opslaan</button>
         <button id="clearBtn" type="submit" class="btn btn-primary" onclick="setAction('clear')">Clear</button>

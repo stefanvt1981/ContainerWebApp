@@ -10,7 +10,10 @@ namespace ContainerWebAppDemo.Components.FileWriter
     {
         public FileWriterService()
         {
-            
+            if (!Directory.Exists(@"/Data/"))
+            {
+                Directory.CreateDirectory(@"/Data/");
+            }
         }
 
         private string _textFilePath = @"/Data/VolumeData.txt";
@@ -19,9 +22,17 @@ namespace ContainerWebAppDemo.Components.FileWriter
         {
             try
             {
-                return File.OpenText(_textFilePath).ReadToEnd();
+                if (!File.Exists(_textFilePath))
+                {
+                    return "";
+                }
+
+                using (var reader = File.OpenText(_textFilePath))
+                {
+                    return reader.ReadToEnd();
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "";
             }
@@ -34,6 +45,7 @@ namespace ContainerWebAppDemo.Components.FileWriter
                 using (var writer = File.AppendText(_textFilePath))
                 {
                     writer.WriteLine(text);
+                    writer.Flush();
                 }
             }
             catch (Exception e)

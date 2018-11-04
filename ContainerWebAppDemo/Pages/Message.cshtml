@@ -1,0 +1,83 @@
+﻿@page
+@model ContainerWebAppDemo.Pages.MessageModel
+@{
+    ViewData["Title"] = "Message";
+}
+<h2>Message service</h2>
+
+<form method="post">
+    <div class="row">
+
+        <div class="col-sm-4">
+            Locatie van de MessageService
+        </div>
+        <div class="col-sm-8">
+            <input type="text" asp-for="MessageSeriveLocation" />
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="col-sm-4">
+            Locatie van de ImageService
+        </div>
+        <div class="col-sm-8">
+            <input type="text" asp-for="ImageSeriveLocation" />
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <input type="submit" value="Haal op" />
+        </div>
+    </div>
+</form>
+
+<br /><br />
+
+@if(Model.Message != null) { 
+<h2>Ontvangen bericht:</h2>
+<div class="row">
+
+    <div class="col-sm-4">
+        Bericht:
+    </div>
+    <div class="col-sm-8">
+        @Model.Message.Message
+    </div>
+
+</div>
+<div class="row">
+
+    <div class="col-sm-4">
+        Gebruikersnaam:
+    </div>
+    <div class="col-sm-8">
+        @Model.Message.UserName
+    </div>
+
+</div>
+<div class="row">
+
+    <div class="col-sm-4">
+        Hostnaam:
+    </div>
+    <div class="col-sm-8">
+        @Model.Message.Host
+    </div>
+
+</div>
+    <div class="row">
+
+        <div class="col-sm-4">
+            Tijd:
+        </div>
+        <div class="col-sm-8">
+            @Model.Message.CurrentTime
+        </div>
+
+    </div>
+    <br />
+    <br />
+    <img src="http://@Model.ImageSeriveLocation/api/images"/>
+}
