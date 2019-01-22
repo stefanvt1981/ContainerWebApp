@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  containerwebappdemo:
+    image: ${DOCKER_REGISTRY-ordinadockerworkshopms}/containerwebappdemo_windows
+    build:
+      context: .
+      dockerfile: ContainerWebAppDemo/Dockerfile
+
+  imageservice:
+    image: ${DOCKER_REGISTRY-ordinadockerworkshopms}/imageservice_windows
+    build:
+      context: .
+      dockerfile: ImageService/Dockerfile
+
+
+  messageservice:
+    image: ${DOCKER_REGISTRY-ordinadockerworkshopms}/messageservice_windows
+    build:
+      context: .
+      dockerfile: MessageService/Dockerfile
+
