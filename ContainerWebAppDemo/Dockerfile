@@ -4,14 +4,15 @@ EXPOSE 80
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
-COPY ["ContainerWebAppDemo/ContainerWebAppDemo.csproj", "ContainerWebAppDemo/"]
-RUN dotnet restore "ContainerWebAppDemo/ContainerWebAppDemo.csproj"
+COPY ContainerWebAppDemo/ContainerWebAppDemo.csproj ContainerWebAppDemo/
+COPY BusinessEntities/BusinessEntities.csproj BusinessEntities/
+RUN dotnet restore ContainerWebAppDemo/ContainerWebAppDemo.csproj
 COPY . .
-WORKDIR "/src/ContainerWebAppDemo"
-RUN dotnet build "ContainerWebAppDemo.csproj" -c Release -o /app
+WORKDIR /src/ContainerWebAppDemo
+RUN dotnet build ContainerWebAppDemo.csproj -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "ContainerWebAppDemo.csproj" -c Release -o /app
+RUN dotnet publish ContainerWebAppDemo.csproj -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
