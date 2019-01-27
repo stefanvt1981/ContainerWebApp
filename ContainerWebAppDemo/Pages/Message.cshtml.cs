@@ -23,6 +23,9 @@ namespace ContainerWebAppDemo.Pages
         [BindProperty]
         public BusinessEntities.MessageModel Message { get; set; }
 
+        [BindProperty]
+        public int ImageSize { get; set; }
+
         public MessageModel()
         {
             _client = new WebClient();
@@ -32,9 +35,11 @@ namespace ContainerWebAppDemo.Pages
         {
             var service1 = HttpContext.Session.GetString("service1") ?? "messageservice";
             var service2 = HttpContext.Session.GetString("service2") ?? "imagesservice";
+            var imageSize = HttpContext.Session.GetInt32("imageSize") ?? 0;
 
             MessageServiceLocation = service1;
             ImageServiceLocation = service2;
+            ImageSize = imageSize;
 
             var jsonMessage = HttpContext.Session.GetString("jsonMessage");
 
@@ -57,6 +62,16 @@ namespace ContainerWebAppDemo.Pages
                 if (!string.IsNullOrWhiteSpace(jsonMessage))
                 {
                     HttpContext.Session.SetString("jsonMessage", jsonMessage);
+                }
+
+                var image =
+                    await _client.DownloadDataTaskAsync($"http://{ImageServiceLocation}/api/testmessage");
+
+                HttpContext.Session.Set("image", image);
+
+                if (image != null)
+                {
+                    HttpContext.Session.SetInt32("imageSize", image.Length);
                 }
             }
             catch

@@ -26,6 +26,7 @@
         </div>
 
     </div>
+
     <div class="row">
         <div class="col-sm-12">
             <input type="submit" value="Haal op" />
@@ -34,39 +35,42 @@
 </form>
 
 <br /><br />
+@Html.DisplayFor(m => m.ImageSize);
+<br /><br />
 
-@if(Model.Message != null) { 
-<h2>Ontvangen bericht:</h2>
-<div class="row">
+@if (Model.Message != null)
+{
+    <h2>Ontvangen bericht:</h2>
+    <div class="row">
 
-    <div class="col-sm-4">
-        Bericht:
+        <div class="col-sm-4">
+            Bericht:
+        </div>
+        <div class="col-sm-8">
+            @Model.Message.Message
+        </div>
+
     </div>
-    <div class="col-sm-8">
-        @Model.Message.Message
-    </div>
+    <div class="row">
 
-</div>
-<div class="row">
+        <div class="col-sm-4">
+            Gebruikersnaam:
+        </div>
+        <div class="col-sm-8">
+            @Model.Message.UserName
+        </div>
 
-    <div class="col-sm-4">
-        Gebruikersnaam:
     </div>
-    <div class="col-sm-8">
-        @Model.Message.UserName
-    </div>
+    <div class="row">
 
-</div>
-<div class="row">
+        <div class="col-sm-4">
+            Hostnaam:
+        </div>
+        <div class="col-sm-8">
+            @Model.Message.Host
+        </div>
 
-    <div class="col-sm-4">
-        Hostnaam:
     </div>
-    <div class="col-sm-8">
-        @Model.Message.Host
-    </div>
-
-</div>
     <div class="row">
 
         <div class="col-sm-4">
@@ -79,5 +83,5 @@
     </div>
     <br />
     <br />
-    <img src="http://imagesservice/api/images"/>
+    <img src="http://imagesservice/api/images" />
 }
