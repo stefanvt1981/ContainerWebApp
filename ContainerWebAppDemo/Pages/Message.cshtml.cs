@@ -14,8 +14,13 @@ namespace ContainerWebAppDemo.Pages
     {
         private WebClient _client;
 
-        public string MessageSeriveLocation { get; set; } = "localhost:10001";
-        public string ImageSeriveLocation { get; set; } = "localhost:10002";
+        [BindProperty]
+        public string MessageServiceLocation { get; set; } = "messageservice";
+
+        [BindProperty]
+        public string ImageServiceLocation { get; set; } = "imageservice";
+
+        [BindProperty]
         public BusinessEntities.MessageModel Message { get; set; }
 
         public MessageModel()
@@ -32,17 +37,26 @@ namespace ContainerWebAppDemo.Pages
                 Message = JsonConvert.DeserializeObject<BusinessEntities.MessageModel>(jsonMessage);
             }
         }
-
+        
         public async Task<IActionResult> OnPostAsync()
         {
-            var jsonMessage = await _client.DownloadStringTaskAsync($"http://{MessageSeriveLocation}/api/testmessage");
+            try{
+                
+                var jsonMessage =
+                    await _client.DownloadStringTaskAsync($"http://{MessageServiceLocation}/api/testmessage");
 
-            if (!string.IsNullOrWhiteSpace(jsonMessage))
+                if (!string.IsNullOrWhiteSpace(jsonMessage))
+                {
+                    HttpContext.Session.SetString("jsonMessage", jsonMessage);
+                }
+            }
+            catch
             {
-                HttpContext.Session.SetString("jsonMessage", jsonMessage);
+                // do nothing
             }
 
             return RedirectToPage("./Message");
+
         }
     }
 }

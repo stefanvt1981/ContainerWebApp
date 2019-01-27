@@ -17,6 +17,10 @@ namespace BusinessEntities
             UserName = Environment.UserName;
         }
 
+        public MessageModel()
+        {
+        }
+
         public static MessageModel CreateMessage(string message)
         {
             return  new MessageModel(message);
