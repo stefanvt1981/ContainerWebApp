@@ -73,6 +73,11 @@ namespace ContainerWebAppDemo.Pages
                 {
                     HttpContext.Session.SetInt32("imageSize", image.Length);
                 }
+                else
+                {
+                    HttpContext.Session.SetInt32("imageSize", 1234);
+                }
+                
             }
             catch
             {
