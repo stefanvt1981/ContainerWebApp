@@ -18,7 +18,7 @@ namespace ContainerWebAppDemo.Pages
         public string MessageServiceLocation { get; set; } = "messageservice";
 
         [BindProperty]
-        public string ImageServiceLocation { get; set; } = "imageservice";
+        public string ImageServiceLocation { get; set; } = "imagesservice";
 
         [BindProperty]
         public BusinessEntities.MessageModel Message { get; set; }

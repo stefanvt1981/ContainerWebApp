@@ -18,9 +18,11 @@ namespace ContainerWebAppDemo.Pages
 
         public ActionResult OnPostUnhandled()
         {
-            throw new ApplicationException("Unhandled Exception!");
+            //throw new ApplicationException("Unhandled Exception!");
 
-            //return new EmptyResult();
+            Program.Shutdown();
+
+            return new EmptyResult();
         }
     }
 }
