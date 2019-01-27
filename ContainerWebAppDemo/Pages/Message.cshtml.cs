@@ -15,10 +15,10 @@ namespace ContainerWebAppDemo.Pages
         private WebClient _client;
 
         [BindProperty]
-        public string MessageServiceLocation { get; set; } = "messageservice";
+        public string MessageServiceLocation { get; set; } 
 
         [BindProperty]
-        public string ImageServiceLocation { get; set; } = "imagesservice";
+        public string ImageServiceLocation { get; set; } 
 
         [BindProperty]
         public BusinessEntities.MessageModel Message { get; set; }
@@ -30,6 +30,12 @@ namespace ContainerWebAppDemo.Pages
 
         public void OnGet()
         {
+            var service1 = HttpContext.Session.GetString("service1") ?? "messageservice";
+            var service2 = HttpContext.Session.GetString("service2") ?? "imagesservice";
+
+            MessageServiceLocation = service1;
+            ImageServiceLocation = service2;
+
             var jsonMessage = HttpContext.Session.GetString("jsonMessage");
 
             if (!string.IsNullOrWhiteSpace(jsonMessage))
@@ -40,8 +46,11 @@ namespace ContainerWebAppDemo.Pages
         
         public async Task<IActionResult> OnPostAsync()
         {
-            try{
-                
+            try
+            {
+                HttpContext.Session.SetString("service1", MessageServiceLocation);
+                HttpContext.Session.SetString("service2", ImageServiceLocation);
+
                 var jsonMessage =
                     await _client.DownloadStringTaskAsync($"http://{MessageServiceLocation}/api/testmessage");
 
