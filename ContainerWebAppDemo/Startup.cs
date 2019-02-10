@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ContainerWebAppDemo.Components.FileWriter;
+using ContainerWebAppDemo.Components.PrimeCalculator;
 using ContainerWebAppDemo.Middleware;
 using ContainerWebAppDemo.Models;
 using Microsoft.AspNetCore.Builder;
@@ -39,6 +40,7 @@ namespace ContainerWebAppDemo
 
             services.AddTransient<IFileWriterService, FileWriterService>();
 
+            services.AddTransient<IPrimeCalculator, PrimeCalculator>();
 
             services.AddDistributedMemoryCache();
 

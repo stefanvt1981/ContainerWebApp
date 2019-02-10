@@ -1,0 +1,16 @@
+﻿@page
+@model ContainerWebAppDemo.Pages.PrimeModel
+@{
+    ViewData["Title"] = "Prime";
+}
+
+<h2>Prime</h2>
+
+<form method="post">
+
+    <button type="submit" class="btn btn-primary" value="Start priem berekening" asp-page-handler="Start">Start priem berekening</button>
+
+    <button type="submit" class="btn btn-primary" value="Stop priem berekening" asp-page-handler="Stop">Stop priem berekening</button>
+
+</form>
+
