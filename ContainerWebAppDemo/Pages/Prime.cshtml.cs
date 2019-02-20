@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using ContainerWebAppDemo.Components.PrimeCalculator;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -9,18 +11,38 @@ namespace ContainerWebAppDemo.Pages
 {
     public class PrimeModel : PageModel
     {
-        public void OnGet()
-        {
+        private IPrimeCalculator _calculator;
+        private CancellationTokenSource _cts;
 
+        public PrimeModel(IPrimeCalculator calculator)
+        {
+            _calculator = calculator;
         }
 
-        public ActionResult OnPostUnhandled()
+        [BindProperty]
+        public int[] Primes { get; set; }
+
+        public void OnGet()
         {
-            //throw new ApplicationException("Unhandled Exception!");
+            Primes = _calculator.GetPrimes();
+        }
 
-            Program.Shutdown();
+        public ActionResult OnPostStartAsync()
+        {
+            _cts = new CancellationTokenSource(20000);
 
-            return new EmptyResult();
+            _calculator.Clear();
+
+            Task.Run(() => _calculator.Run(_cts));
+
+            return RedirectToPage("./Prime");
+        }
+
+        public ActionResult OnPostStopAsync()
+        {
+            _cts.Cancel();
+
+            return RedirectToPage("./Prime");
         }
     }
 }

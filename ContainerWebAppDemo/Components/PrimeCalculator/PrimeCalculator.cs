@@ -38,7 +38,8 @@ namespace ContainerWebAppDemo.Components.PrimeCalculator
                 {
                     _results.Add(number);
                 }
-                
+
+                number++;
             }
 
             return Task.CompletedTask;
