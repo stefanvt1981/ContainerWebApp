@@ -35,6 +35,12 @@ namespace ContainerWebAppDemo.Middleware
             {
                 optionsFromSession = _delayOptions;
             }
+
+            if (_delayOptions.Crash)
+            {
+                throw new ApplicationException("Unhandled!");
+            }
+
             if (optionsFromSession.UseDelay)
             {
                 await Task.Delay(optionsFromSession.DelayInMilliseconds);

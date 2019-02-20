@@ -1,0 +1,36 @@
+pool:
+  vmImage: Hosted Ubuntu 1604
+steps:
+- task: DockerCompose@0
+  displayName: 'Build services'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryEndpoint: ordinadockerworkshopms
+    dockerComposeFile: 'docker-compose.yml'
+    dockerComposeFileArgs: 'DOCKER_REGISTRY=ordinadockerworkshopms'
+    action: 'Build services'
+    additionalImageTags: '$(Build.BuildNumber)'
+    includeLatestTag: true
+
+- task: DockerCompose@0
+  displayName: 'Push services'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryEndpoint: ordinadockerworkshopms
+    dockerComposeFile: 'docker-compose.yml'
+    dockerComposeFileArgs: 'DOCKER_REGISTRY=ordinadockerworkshopms'
+    action: 'Push services'
+    additionalImageTags: '$(Build.BuildNumber)'
+    includeLatestTag: true
+
+- task: Kubernetes@1
+  displayName: 'kubectl set'
+  inputs:
+    azureSubscriptionEndpoint: 'Visual Studio Enterprise (5b3d1b93-4656-4c75-b13d-05ee3b340f90)'
+    azureResourceGroup: KubusResource
+    kubernetesCluster: OMSKubus
+    command: set
+    arguments: 'image deployment/webappdemo webappdemo=ordinadockerworkshopms/containerwebappdemo:$(Build.BuildNumber)'
+    versionSpec: 1.7.0
+
+

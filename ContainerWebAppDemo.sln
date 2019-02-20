@@ -13,7 +13,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageService", "ImageServic
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C99A2AF7-7AE3-485F-AC77-863BFCBE1F5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMessageService", "TestMessageService\TestMessageService.csproj", "{D9D35D93-311F-479C-9840-1647584D8A2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMessageService", "TestMessageService\TestMessageService.csproj", "{D9D35D93-311F-479C-9840-1647584D8A2C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{9CC8E93D-E4AE-42A1-AF60-0CAF8AA62662}"
+	ProjectSection(SolutionItems) = preProject
+		DemoWebApp_k8_deployment.yaml = DemoWebApp_k8_deployment.yaml
+		ImageService_k8_deployment.yaml = ImageService_k8_deployment.yaml
+		MessageService_k8_deployment.yaml = MessageService_k8_deployment.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Azure Pipelines", "Azure Pipelines", "{FBCA14FD-C8D8-40C4-928A-D8507F9E9AB1}"
+	ProjectSection(SolutionItems) = preProject
+		pipeline.yaml = pipeline.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

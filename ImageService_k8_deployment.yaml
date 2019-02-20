@@ -1,0 +1,16 @@
+ apiVersion: extensions/v1beta1
+ kind: Deployment
+ metadata:
+   name: imageservice
+ spec:
+   replicas: 5
+   template:
+     metadata:
+       labels:
+         app: web
+     spec:
+       containers:
+         - name: imageservice
+           image: ordinadockerworkshopms/imageservice:latest
+           ports:
+             - containerPort: 80

@@ -13,5 +13,7 @@ namespace ContainerWebAppDemo.Models
         public bool UseDelay { get; set; } = false;
         [DataMember]
         public int DelayInMilliseconds { get; set; }
+        [DataMember]
+        public bool Crash { get; set; }
     }
 }
