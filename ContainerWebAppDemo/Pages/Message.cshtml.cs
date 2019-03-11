@@ -34,12 +34,12 @@ namespace ContainerWebAppDemo.Pages
         public void OnGet()
         {
             var service1 = HttpContext.Session.GetString("service1") ?? "messageservice";
-            var service2 = HttpContext.Session.GetString("service2") ?? "imagesservice";
-            var imageSize = HttpContext.Session.GetInt32("imageSize") ?? 0;
+            //var service2 = HttpContext.Session.GetString("service2") ?? "imagesservice";
+            //var imageSize = HttpContext.Session.GetInt32("imageSize") ?? 0;
 
             MessageServiceLocation = service1;
-            ImageServiceLocation = service2;
-            ImageSize = imageSize;
+            //ImageServiceLocation = service2;
+            //ImageSize = imageSize;
 
             var jsonMessage = HttpContext.Session.GetString("jsonMessage");
 
@@ -54,7 +54,7 @@ namespace ContainerWebAppDemo.Pages
             try
             {
                 HttpContext.Session.SetString("service1", MessageServiceLocation);
-                HttpContext.Session.SetString("service2", ImageServiceLocation);
+                //HttpContext.Session.SetString("service2", ImageServiceLocation);
 
                 var jsonMessage =
                     await _client.DownloadStringTaskAsync($"http://{MessageServiceLocation}/api/testmessage");
@@ -64,6 +64,7 @@ namespace ContainerWebAppDemo.Pages
                     HttpContext.Session.SetString("jsonMessage", jsonMessage);
                 }
 
+                /*
                 var image =
                     await _client.DownloadDataTaskAsync($"http://{ImageServiceLocation}/api/testmessage");
 
@@ -76,7 +77,7 @@ namespace ContainerWebAppDemo.Pages
                 else
                 {
                     HttpContext.Session.SetInt32("imageSize", 1234);
-                }
+                }*/
                 
             }
             catch
